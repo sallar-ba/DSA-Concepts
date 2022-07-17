@@ -1,4 +1,5 @@
 #include<iostream>	//Input Output Lib.
+#include<string> // For Strings.
 using namespace std; //Using a Standard
 template<class ItemType>	//Template
 //--+-+-+-+-+-+-+-+-+-+-+-+- Linked List Class -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-//
@@ -54,7 +55,72 @@ public:
 			Temp->Next = N; // Assiging Next the N
 		}
 	}
+	//*******************************************//
+	void insertAfter(ItemType oldVal, ItemType newVal)
+	{
+		NODEPTR newNode = new Node; // New Node
+		newNode->info = newVal; // Stroting Info
+		NODEPTR oldNode = SearchVal(oldVal); // Searching for Val
+		newNode->Next = oldNode->Next; // Updating Links
+		oldNode->Next = newNode;
+	}
 	//------------------------------------------------------------//
+
+	//------- Other Imp. Functions -------//
+
+	//************* Search Func. ****************//
+	NODEPTR SearchVal(ItemType Val)
+	{
+		NODEPTR Temp = Head; // Assiging temp The Head
+		while (Temp != NULL) // traversing
+		{
+			if (Temp->info == Val) // Comparing vals
+			{
+				return Temp; // returning Node on Find
+			}
+			Temp = Temp->Next; // Going to Next node
+		}
+		return NULL; // returning NULL if Not Found
+	}
+	//*******************************************//
+	
+	//*********** Node Counter ****************//
+	int countNodes()
+	{
+		int Num = 0; // Initializing a Var.
+		NODEPTR Temp = Head; // Assiging Temp the Head
+		while (Temp!= NULL) // Traversing
+		{
+			Num++;// Incrementing 
+			Temp = Temp->Next; // Going to next Node
+		}
+		return Num; // Returning Num
+	}
+	//*****************************************//
+
+	//------ Delete Functions------//
+	void DeleteHead(ItemType& info)
+	{
+		NODEPTR Temp = Head; // Assiging Head to Temp
+		info = Temp->info; // Retrieving info
+		Head = Temp->Next; // Assiging Head the Next Node
+		delete Temp; // Delete the First
+	}
+	//**************************//
+	void DeleteEndNode(ItemType& info)
+	{
+		NODEPTR Temp = Head; // Assiging Temp the Head
+		NODEPTR P = new Node; // Getting another Node
+		while (Temp->Next != NULL) // Traversing
+		{
+			P = Temp; // Assiging the P to Temp
+			Temp= Temp->Next; // Going to Next
+		}
+		info = P->Next->info; // Retrieving Info
+		P->Next = NULL; // Assiging the Last Null
+		delete Temp; // Deleting Temp
+	}
+	//---------------------------------------
 
 	//------- Display Function -------//
 	void DisplayList()
@@ -67,7 +133,7 @@ public:
 		}
 		cout << "NULL"; // Printing Null at Last
 	}
-	//----------------------------------
+	//----------------------------------//
 };
 //-+-+-+-+-+-+-+-+-+-+-+-+- End Of Linked List Class -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-//
 
@@ -78,18 +144,23 @@ int main()
 		Test Code
 	*/
 
-	Linked_List <int>L; // Creating an Obj.
+	Linked_List <int>List; // Creating an Obj. of integer Data Member
 
 	//*********************************//
 
-	L.insertAtTail(8);
-	L.insertAtTail(9);
-	L.insertAtTail(0);
-	L.insertAtFront(2);
+	List.insertAtTail(8);
+	List.insertAtTail(9);
+	List.insertAtTail(0);
+	List.insertAtFront(2);
+	List.insertAtFront(5);
+
+	List.DisplayList();
 
 	//**********************************//
 
-	L.DisplayList(); // Calling Display
+	/*
+			Experiment By Calling Functions ;)
+	*/
 
 
 	system("PAUSE>0"); //Calling a Pause
