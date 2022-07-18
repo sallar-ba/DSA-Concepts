@@ -211,6 +211,45 @@ void quickSort(ItemType*& Arr, int L, int R)
 }
 //-------------------- END --------------------//
 
+//----------- HEAP SORT ---------------//
+template<class ItemType>
+void Heapify(ItemType*& Arr, int N, int i)
+{
+	int Largest = i;
+	int Left = (2 * i) + 1, Right = (2 * i) + 2;
+	if (Left < N && Arr[Left] > Arr[Largest])
+	{
+		Largest = Left;
+	}
+	if (Right<N && Arr[Right] > Arr[Largest])
+	{
+		Largest = Right;
+	}
+	if (Largest != i)
+	{
+		swap(Arr[i], Arr[Largest]);
+		Heapify(Arr, N, Largest);
+
+	}
+
+}
+template<class ItemType>
+void HeapSort(ItemType*& Arr, int N)
+{
+	for (int i = (N/2) - 1; i >= 0; i--)
+	{
+		Heapify(Arr, N, i);
+	}
+	for (int i = N - 1; i > 0; i--)
+	{
+		swap(Arr[0], Arr[i]);
+		Heapify(Arr, i, 0);
+	}
+
+}
+//-------------------- END --------------------//
+
+
 
 //***************************************************//
 int main()
@@ -254,7 +293,10 @@ int main()
 	//MergeSort(Arr, 0, N - 1);
 	
 								// Applying Quick Sort
-	quickSort(Arr, 0, N - 1);
+	//quickSort(Arr, 0, N - 1);
+
+								// Applying Heap Sort
+	HeapSort(Arr, N);
 
 	/*
 		Printing Sorted Array
