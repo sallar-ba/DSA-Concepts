@@ -2,6 +2,18 @@
 #include<ctime>
 using namespace std;
 
+/*
+		******* ALGORITHM FOR BUBBLE SORT ******* 
+
+		Algorithm bubbleSort (A, n)
+		Input An array A of n elements
+		Output Array A arranged in ascending order
+			for i <- n-1 downto 1 do
+				for j <- 1 to i do
+					if A[j-1] > A[j] then
+						Swap(A[j-1], A[j] )
+*/
+
 // ----------- BUBBLE SORT ---------// 
 template<class ItemType>
 void BubbleSort(ItemType* Arr, int N)
@@ -20,6 +32,38 @@ void BubbleSort(ItemType* Arr, int N)
 }
 // --------------  END ------------//
 
+/*
+	Algorithm selectionSort (A, n)
+	Input An array A of n elements
+	Output Array A arranged in ascending order
+		for i <- 0 to n-1 do
+			min <- i
+			for j <- i+1 to n do
+				if A[j] < A[min] then
+					min <- j
+		    Swap (A[i], A[min] )
+*/
+
+
+// ----------- SELECTION SORT ---------// 
+template<class ItemType> // Using Templates
+void SelectionSort(ItemType*& Arr, int N)
+{
+	int Min = 0; // Decalring Variables
+	for (int i = 0; i < N - 1; i++) // First For-Loop
+	{
+		Min = i; // Taking The First Element
+		for (int j = i + 1; j < N ; j++) //Nested For Loop
+		{
+			if (Arr[j]< Arr[Min]) // Checking For minimum Element
+			{
+				Min = j; // Assigning minimum Elmenent index to Min
+			}
+		}
+		swap(Arr[i], Arr[Min]); // Swapping
+	}
+}
+// -------------------- END ---------------------// 
 
 //***************************************************//
 int main()
@@ -51,8 +95,10 @@ int main()
 	*/
 
 								// Applying Bubble Sort
-	BubbleSort(Arr, N);
+	//BubbleSort(Arr, N);
 
+								// Applying Selection Sort
+	SelectionSort(Arr, N);
 
 	/*
 		Printing Sorted Array
