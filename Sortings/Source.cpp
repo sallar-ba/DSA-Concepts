@@ -1,3 +1,4 @@
+//Sallar Bin Aamir
 #include<iostream>
 #include<ctime>
 using namespace std;
@@ -71,7 +72,7 @@ void SelectionSort(ItemType*& Arr, int N)
 /*
 		******* ALGORITHM FOR INSERTION SORT *******
 
-	Algorithm selectionSort (A, n)
+	Algorithm inserttionSort (A, n)
 	Input An array A of n elements
 	Output Array A arranged in ascending order
 		for i <- 1 to n
@@ -100,6 +101,82 @@ void InsertionSort(ItemType*& Arr, int N)
 	}
 }
 // -------------------- END ---------------------// 
+
+/*
+	******* ALGORITHM FOR MERGE SORT *******
+
+	Algorithm MergeSort (A, L, R)
+	Input An array A and L and R
+	Output Array A arranged in ascending order
+		if L<R
+			Mid = (L+R)/2
+			MergeSort(Arr, L, Mid)
+			MergeSort(Arr, Mid+1, R)
+
+			Merge(Arr, L, Mid, R)
+
+*/
+
+
+//----------- MERGE SORT ---------------//
+template<class ItemType>
+void Merge(ItemType*& Arr, int L, int Mid, int R)
+{
+	int N1 = Mid - L + 1;
+	int N2 = R - Mid;
+
+	// Temporary Arrays
+	ItemType* A = new ItemType[N1];
+	ItemType* B = new ItemType[N2];
+
+	// Adding Elements into Array
+	for (int i = 0; i < N1; i++)
+	{
+		A[i] = Arr[L + i];
+	}
+	for (int i = 0; i < N2; i++)
+	{
+		B[i] = Arr[Mid + 1 + i];
+	}
+	int i = 0, j = 0, k = L;
+	while (i<N1 && j<N2)
+	{
+		if (A[i] < B[j])
+		{
+			Arr[k] = A[i];
+			k++; i++;
+		}
+		else
+		{
+			Arr[k] = B[j];
+			k++; j++;
+		}
+	}
+	while (i<N1)
+	{
+		Arr[k] = A[i];
+		k++; i++;
+	}
+	while (j<N2)
+	{
+		Arr[k] = B[j];
+		k++; j++;
+	}
+}
+template<class ItemType>
+void MergeSort(ItemType*& Arr, int L, int R)
+{
+	if (L < R)
+	{
+		//Recursive
+		int Mid = (L + R) / 2;
+		MergeSort(Arr, L, Mid);
+		MergeSort(Arr, Mid + 1, R);
+
+		Merge(Arr, L, Mid, R);
+	}
+}
+//--------------------- END -----------------//
 
 //***************************************************//
 int main()
@@ -137,7 +214,10 @@ int main()
 	//SelectionSort(Arr, N);
 
 								// Applying Insertion Sort
-	InsertionSort(Arr, N);
+	//InsertionSort(Arr, N);
+
+								// Applying Insertion Sort
+	MergeSort(Arr, 0, N - 1);
 
 	/*
 		Printing Sorted Array
