@@ -178,6 +178,40 @@ void MergeSort(ItemType*& Arr, int L, int R)
 }
 //--------------------- END -----------------//
 
+
+//----------- QUICK SORT ---------------//
+
+template<class ItemType>
+int Partition(ItemType*& Arr, int L, int R)
+{
+	int Pivot = Arr[R];
+	int i = L - 1;
+	for (int j = L; j < R; j++)
+	{
+		if (Arr[j] < Pivot)
+		{
+			i++;
+			swap(Arr[i], Arr[j]);
+		}
+	}
+	int k = i + 1;
+	swap(Arr[k], Arr[R]);
+	return k;
+}
+template<class ItemType>
+void quickSort(ItemType*& Arr, int L, int R)
+{
+	if (L<R)
+	{
+		int Pivot = Partition(Arr, L, R);
+
+		quickSort(Arr, L, Pivot - 1);
+		quickSort(Arr, Pivot + 1, R);
+	}
+}
+//-------------------- END --------------------//
+
+
 //***************************************************//
 int main()
 {
@@ -216,8 +250,11 @@ int main()
 								// Applying Insertion Sort
 	//InsertionSort(Arr, N);
 
-								// Applying Insertion Sort
-	MergeSort(Arr, 0, N - 1);
+								// Applying Merge Sort
+	//MergeSort(Arr, 0, N - 1);
+	
+								// Applying Quick Sort
+	quickSort(Arr, 0, N - 1);
 
 	/*
 		Printing Sorted Array
