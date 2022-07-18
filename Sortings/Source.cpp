@@ -33,12 +33,14 @@ void BubbleSort(ItemType* Arr, int N)
 // --------------  END ------------//
 
 /*
+		******* ALGORITHM FOR SELECTION SORT *******
+
 	Algorithm selectionSort (A, n)
 	Input An array A of n elements
 	Output Array A arranged in ascending order
-		for i <- 0 to n-1 do
+		for i <- 0 to n-2 do
 			min <- i
-			for j <- i+1 to n do
+			for j <- i+1 to n-1 do
 				if A[j] < A[min] then
 					min <- j
 		    Swap (A[i], A[min] )
@@ -61,6 +63,40 @@ void SelectionSort(ItemType*& Arr, int N)
 			}
 		}
 		swap(Arr[i], Arr[Min]); // Swapping
+	}
+}
+// -------------------- END ---------------------// 
+
+
+/*
+		******* ALGORITHM FOR INSERTION SORT *******
+
+	Algorithm selectionSort (A, n)
+	Input An array A of n elements
+	Output Array A arranged in ascending order
+		for i <- 1 to n
+			current <- A[i]
+			j <- i - 1
+			while A[j]>current && j >= 0
+				A[j + 1] = A[j]
+				j--
+			A[j + 1] = current
+*/
+
+// ----------- INSERTION SORT ---------// 
+template<class ItemType> // Using Templates
+void InsertionSort(ItemType*& Arr, int N)
+{
+	for (int i = 1; i < N; i++)
+	{
+		int Current = Arr[i]; // Assiging the Next Element as Current
+		int j = i - 1; //Prev Element
+		while (Arr[j]>Current && j>= 0) //Checking 
+		{
+			Arr[j + 1] = Arr[j]; // Moving elements
+			j--; // Decrementing J
+		}
+		Arr[j + 1] = Current; // Updating Array
 	}
 }
 // -------------------- END ---------------------// 
@@ -98,7 +134,10 @@ int main()
 	//BubbleSort(Arr, N);
 
 								// Applying Selection Sort
-	SelectionSort(Arr, N);
+	//SelectionSort(Arr, N);
+
+								// Applying Insertion Sort
+	InsertionSort(Arr, N);
 
 	/*
 		Printing Sorted Array
